@@ -1,4 +1,4 @@
-package com.student.analytics.util;
+package com.student.analytics.utility;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

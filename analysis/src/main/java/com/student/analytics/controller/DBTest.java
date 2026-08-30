@@ -1,6 +1,6 @@
 package com.student.analytics.controller;
 
-import com.student.analytics.util.DBConnection;
+import com.student.analytics.utility.DBConnection;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

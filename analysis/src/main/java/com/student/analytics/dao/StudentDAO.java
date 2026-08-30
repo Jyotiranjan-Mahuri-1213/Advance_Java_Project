@@ -1,7 +1,7 @@
 package com.student.analytics.dao;
 
 import com.student.analytics.entity.Student;
-import com.student.analytics.util.DBConnection;
+import com.student.analytics.utility.DBConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,19 +11,23 @@ public class StudentDAO {
 
     public boolean addStudent(Student student) {
 
-        String sql = "insert into students name, email, regd_no, course, semester values (?, ?, ?, ?, ?)";
+        String sql = "insert into students (name, email, regd_no, course, semester,password) values (?, ?, ?, ?, ?,?)";
 
         try{
+            System.out.println("load database");
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DBConnection.getConnection();
              PreparedStatement ps = con.prepareStatement(sql) ;
 
             ps.setString(1, student.getName());
             ps.setString(2, student.getEmail());
-            ps.setString(3, student.getRegd_no());
+            ps.setInt(3, student.getRegd_no());
             ps.setString(4, student.getCourse());
-            ps.setInt(5, student.getSemester());
-
+            ps.setString(5, String.valueOf(student.getSemester()));
+            ps.setString(6, student.getPassword());
+          //  ps.executeUpdate();
+          //  System.out.println("data added");
+            System.out.println("Executing INSERT query...");
             return ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
@@ -53,9 +57,10 @@ public class StudentDAO {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("email"),
-                        rs.getString("regd_no"),
+                        rs.getInt("regd_no"),
                         rs.getString("course"),
-                        rs.getInt("semester")
+                        rs.getInt("semester"),
+                        rs.getString("password")
                 );
 
                 students.add(student);
@@ -89,9 +94,10 @@ public class StudentDAO {
                             rs.getInt("id"),
                             rs.getString("name"),
                             rs.getString("email"),
-                            rs.getString("regd_no"),
+                            rs.getInt("regd_no"),
                             rs.getString("course"),
-                            rs.getInt("semester")
+                            rs.getInt("semester"),
+                            rs.getString("password")
                     );
                 }
             }
@@ -106,7 +112,7 @@ public class StudentDAO {
     }
     public boolean updateStudent(Student student) {
 
-        String sql = "update students set name = ?, email = ?, roll_number = ?, course = ?, semester = ? where id = ?";
+        String sql = "update students set name = ?, email = ?, roll_number = ?, course = ?, semester = ?,password=? where id = ?";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -115,9 +121,9 @@ public class StudentDAO {
 
             ps.setString(1, student.getName());
             ps.setString(2, student.getEmail());
-            ps.setString(3, student.getRegd_no());
+            ps.setInt(3, student.getRegd_no());
             ps.setString(4, student.getCourse());
-            ps.setInt(5, student.getSemester());
+            ps.setString(5, String.valueOf(student.getSemester()));
             ps.setInt(6, student.getId());
 
             return ps.executeUpdate() > 0;
