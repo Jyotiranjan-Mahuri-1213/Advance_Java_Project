@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Performance Analytics</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 70px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 35px;
+            border-bottom: 1px solid #e5e7eb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .logo h2 {
+            font-size: 20px;
+            color: #1e293b;
+        }
+
+        .logo span {
+            color: #2563eb;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: #2563eb;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+        .profile-name {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .profile-role {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 3px;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .main {
+            padding: 35px;
+            max-width: 1400px;
+            margin: auto;
+        }
+
+
+        /* ================= WELCOME ================= */
+
+        .welcome-section {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            padding: 32px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .welcome-text h1 {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-text p {
+            color: #dbeafe;
+            font-size: 15px;
+        }
+
+        .student-info {
+            text-align: right;
+        }
+
+        .student-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #dbeafe;
+        }
+
+
+        /* ================= CARDS ================= */
+
+        .section-title {
+            margin-bottom: 18px;
+            font-size: 20px;
+            color: #1e293b;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .card-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 9px;
+            background: #eff6ff;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .card-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .card-subtitle {
+            margin-top: 7px;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+
+        .content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+        }
+
+        .panel {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 25px;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 22px;
+        }
+
+        .panel-header h2 {
+            font-size: 18px;
+            color: #1e293b;
+        }
+
+
+        /* ================= PROGRESS ================= */
+
+        .subject {
+            margin-bottom: 20px;
+        }
+
+        .subject-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .subject-name {
+            font-weight: bold;
+        }
+
+        .percentage {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            height: 9px;
+            background: #e5e7eb;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: #2563eb;
+            border-radius: 10px;
+        }
+
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .action {
+            padding: 18px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #1e293b;
+            transition: 0.2s;
+        }
+
+        .action:hover {
+            border-color: #2563eb;
+            background: #eff6ff;
+        }
+
+        .action-icon {
+            width: 35px;
+            height: 35px;
+            background: #eff6ff;
+            color: #2563eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .action-title {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .action-description {
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #94a3b8;
+            font-size: 13px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1000px) {
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .logo h2 {
+                font-size: 16px;
+            }
+
+            .profile-name,
+            .profile-role {
+                display: none;
+            }
+
+            .main {
+                padding: 20px 15px;
+            }
+
+            .welcome-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .student-info {
+                text-align: left;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            SP
+        </div>
+
+        <h2>
+            Student <span>Analytics</span>
+        </h2>
+
+    </div>
+
+
+    <div class="profile">
+
+        <div class="profile-circle">
+            JM
+        </div>
+
+        <div>
+
+            <div class="profile-name">
+                Student
+            </div>
+
+            <div class="profile-role">
+                Student Account
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+
+    <!-- Welcome -->
+
+    <section class="welcome-section">
+
+        <div class="welcome-text">
+
+            <h1>
+                Welcome, Student! 👋
+            </h1>
+
+            <p>
+                Track your academic performance and monitor your progress.
+            </p>
+
+        </div>
+
+
+        <div class="student-info">
+
+            <p>
+                <strong>Course:</strong> MCA
+            </p>
+
+            <p>
+                <strong>Semester:</strong> 3
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= PERFORMANCE CARDS ================= -->
+
+    <h2 class="section-title">
+        Performance Overview
+    </h2>
+
+
+    <section class="cards">
+
+
+        <div class="card">
+
+            <div class="card-top">
+
+                <span class="card-title">
+                    Overall CGPA
+                </span>
+
+                <div class="card-icon">
+                    CG
+                </div>
+
+            </div>
+
+            <div class="card-value">
+                8.42
+            </div>
+
+            <div class="card-subtitle">
+                Current academic performance
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-top">
+
+                <span class="card-title">
+                    Attendance
+                </span>
+
+                <div class="card-icon">
+                    %
+                </div>
+
+            </div>
+
+            <div class="card-value">
+                86%
+            </div>
+
+            <div class="card-subtitle">
+                Overall attendance
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-top">
+
+                <span class="card-title">
+                    Subjects
+                </span>
+
+                <div class="card-icon">
+                    SB
+                </div>
+
+            </div>
+
+            <div class="card-value">
+                6
+            </div>
+
+            <div class="card-subtitle">
+                Current semester
+            </div>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <div class="card-top">
+
+                <span class="card-title">
+                    Class Rank
+                </span>
+
+                <div class="card-icon">
+                    #
+                </div>
+
+            </div>
+
+            <div class="card-value">
+                12
+            </div>
+
+            <div class="card-subtitle">
+                Among your classmates
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- ================= CONTENT ================= -->
+
+    <section class="content">
+
+
+        <!-- Subject Performance -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <h2>
+                    Subject Performance
+                </h2>
+
+                <span>
+                    Current Semester
+                </span>
+
+            </div>
+
+
+            <div class="subject">
+
+                <div class="subject-header">
+
+                    <span class="subject-name">
+                        Advanced Java
+                    </span>
+
+                    <span class="percentage">
+                        88%
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress" style="width: 88%;"></div>
+                </div>
+
+            </div>
+
+
+            <div class="subject">
+
+                <div class="subject-header">
+
+                    <span class="subject-name">
+                        Data Structures
+                    </span>
+
+                    <span class="percentage">
+                        82%
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress" style="width: 82%;"></div>
+                </div>
+
+            </div>
+
+
+            <div class="subject">
+
+                <div class="subject-header">
+
+                    <span class="subject-name">
+                        Database Management
+                    </span>
+
+                    <span class="percentage">
+                        91%
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress" style="width: 91%;"></div>
+                </div>
+
+            </div>
+
+
+            <div class="subject">
+
+                <div class="subject-header">
+
+                    <span class="subject-name">
+                        Web Technology
+                    </span>
+
+                    <span class="percentage">
+                        85%
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress" style="width: 85%;"></div>
+                </div>
+
+            </div>
+
+
+            <div class="subject">
+
+                <div class="subject-header">
+
+                    <span class="subject-name">
+                        Software Engineering
+                    </span>
+
+                    <span class="percentage">
+                        78%
+                    </span>
+
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress" style="width: 78%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Quick Actions -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <h2>
+                    Quick Actions
+                </h2>
+
+            </div>
+
+
+            <div class="actions">
+
+
+                <a href="#" class="action">
+
+                    <div class="action-icon">
+                        📊
+                    </div>
+
+                    <div class="action-title">
+                        Performance
+                    </div>
+
+                    <div class="action-description">
+                        View detailed performance
+                    </div>
+
+                </a>
+
+
+                <a href="#" class="action">
+
+                    <div class="action-icon">
+                        📚
+                    </div>
+
+                    <div class="action-title">
+                        Subjects
+                    </div>
+
+                    <div class="action-description">
+                        View your subjects
+                    </div>
+
+                </a>
+
+
+                <a href="#" class="action">
+
+                    <div class="action-icon">
+                        📈
+                    </div>
+
+                    <div class="action-title">
+                        Analytics
+                    </div>
+
+                    <div class="action-description">
+                        Analyze your progress
+                    </div>
+
+                </a>
+
+
+                <a href="#" class="action">
+
+                    <div class="action-icon">
+                        👤
+                    </div>
+
+                    <div class="action-title">
+                        Profile
+                    </div>
+
+                    <div class="action-description">
+                        View your profile
+                    </div>
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<footer>
+
+    Student Performance Analytics Dashboard © 2026
+
+</footer>
+
+
+</body>
+
+</html>

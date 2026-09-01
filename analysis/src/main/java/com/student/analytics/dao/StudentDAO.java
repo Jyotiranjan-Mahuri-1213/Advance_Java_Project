@@ -9,7 +9,9 @@ import java.util.List;
 
 public class StudentDAO {
 
-    public boolean addStudent(Student student) {
+    private String email;
+
+    public boolean register(Student student) {
 
         String sql = "insert into students (name, email, regd_no, course, semester,password) values (?, ?, ?, ?, ?,?)";
 
@@ -27,7 +29,7 @@ public class StudentDAO {
             ps.setString(6, student.getPassword());
           //  ps.executeUpdate();
           //  System.out.println("data added");
-            System.out.println("Executing INSERT query...");
+            System.out.println("Execute query...");
             return ps.executeUpdate() > 0;
 
         } catch (SQLException e) {
@@ -38,20 +40,21 @@ public class StudentDAO {
 
         return false;
     }
+    public Student login(String email, String password) {
 
-    public List<Student> getAllStudents() {
-
-        List<Student> students = new ArrayList<>();
-
-        String sql = "select * from students";
+        String sql = "select * from students where email = ? AND password = ?";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery() ;
+            PreparedStatement ps = con.prepareStatement(sql);
 
-            while (rs.next()) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
 
                 Student student = new Student(
                         rs.getInt("id"),
@@ -63,97 +66,52 @@ public class StudentDAO {
                         rs.getString("password")
                 );
 
-                students.add(student);
+                return student;
             }
 
         } catch (SQLException e) {
+
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }
-
-        return students;
-    }
-
-    public Student getStudentById(int id) {
-
-        String sql = "select * from students where id = ?";
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql) ;
-
-            ps.setInt(1, id);
-
-            try (ResultSet rs = ps.executeQuery()) {
-
-                if (rs.next()) {
-
-                    return new Student(
-                            rs.getInt("id"),
-                            rs.getString("name"),
-                            rs.getString("email"),
-                            rs.getInt("regd_no"),
-                            rs.getString("course"),
-                            rs.getInt("semester"),
-                            rs.getString("password")
-                    );
-                }
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-
         }
 
         return null;
     }
-    public boolean updateStudent(Student student) {
 
-        String sql = "update students set name = ?, email = ?, roll_number = ?, course = ?, semester = ?,password=? where id = ?";
+    public Student getStudentByEmail(String studentEmail) {
+        String sql = "select * from students where email = ?";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql) ;
 
-            ps.setString(1, student.getName());
-            ps.setString(2, student.getEmail());
-            ps.setInt(3, student.getRegd_no());
-            ps.setString(4, student.getCourse());
-            ps.setString(5, String.valueOf(student.getSemester()));
-            ps.setInt(6, student.getId());
+            PreparedStatement ps = con.prepareStatement(sql);
 
-            return ps.executeUpdate() > 0;
+            ps.setString(1,email);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+            ResultSet rs = ps.executeQuery();
 
-        return false;
-    }
+            if (rs.next()) {
 
-    public boolean deleteStudent(int id) {
-        String sql = "delete from students where id = ?";
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DBConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql) ;
-
-            ps.setInt(1, id);
-
-            return ps.executeUpdate() > 0;
+                return new Student(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getInt("regd_no"),
+                        rs.getString("course"),
+                        rs.getInt("semester"),
+                        rs.getString("password")
+                );
+            }
 
         } catch (SQLException e) {
+
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            
         }
 
-        return false;
+        return null;
     }
 }

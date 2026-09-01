@@ -48,69 +48,19 @@ public class StudentService {
         }
         System.out.println("Calling StudentDAO...");
 
-        return studentDAO.addStudent(student);
+        return studentDAO.register(student);
     }
 
 
-    public List<Student> getAllStudents() {
+    public Student login(String email, String password) {
 
-        return studentDAO.getAllStudents();
-    }
-
-
-    public Student getStudentById(int id) {
-
-        if (id <= 0) {
+        if (email == null || email.trim().isEmpty()) {
             return null;
         }
 
-        return studentDAO.getStudentById(id);
-    }
-
-    public boolean updateStudent(Student student) {
-
-        if (student == null || student.getId() <= 0) {
-            return false;
+        if (password == null || password.trim().isEmpty()) {
+            return null;
         }
-
-        if (student.getName() == null ||
-                student.getName().trim().isEmpty()) {
-            return false;
-        }
-
-        if (student.getEmail() == null ||
-                student.getEmail().trim().isEmpty()) {
-            return false;
-        }
-
-        if (student.getRegd_no() <= 0) {
-            return false;
-        }
-
-        if (student.getCourse() == null ||
-                student.getCourse().trim().isEmpty()) {
-            return false;
-        }
-
-        if (student.getSemester() <= 0) {
-            return false;
-        }
-
-        if (student.getPassword() == null ||
-                student.getPassword().trim().isEmpty()) {
-            return false;
-        }
-
-        return studentDAO.updateStudent(student);
-    }
-
-
-    public boolean deleteStudent(int id) {
-
-        if (id <= 0) {
-            return false;
-        }
-
-        return studentDAO.deleteStudent(id);
+        return studentDAO.login(email, password);
     }
 }

@@ -26,7 +26,7 @@ public class RegisterController extends HttpServlet {
                           HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("===== REGISTER REQUEST =====");
+        System.out.println("Request data..");
 
         String name = request.getParameter("name");
         String email = request.getParameter("email");
@@ -50,9 +50,9 @@ public class RegisterController extends HttpServlet {
         try {
 
             regdNo = Integer.parseInt(regdNoValue);
-            System.out.println("Registration number converted: " + regdNo);
+            System.out.println("Registration number converted: ");
             semester = Integer.parseInt(semesterValue);
-            System.out.println("Semester converted: " + semester);
+            System.out.println("Semester converted: ");
 
         } catch (NumberFormatException e) {
 
@@ -70,9 +70,10 @@ public class RegisterController extends HttpServlet {
         );
 
         boolean registered = studentService.addStudent(student);
+        System.out.println("registration Successful");
 
         if (registered) {
-
+            System.out.println("registration Successful");
             response.sendRedirect("login.html");
 
         } else {
