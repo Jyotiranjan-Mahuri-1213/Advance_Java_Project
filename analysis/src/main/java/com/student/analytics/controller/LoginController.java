@@ -35,18 +35,22 @@ public class LoginController extends HttpServlet {
         Student student = studentService.login(email, password);
 
         if (student != null) {
-
             System.out.println("Login successful");
             System.out.println("Student: " + student.getName());
 
+            System.out.println("Context Path: " + request.getContextPath());
+            System.out.println("Request URL: " + request.getRequestURL());
+
             Cookie emailCookie = new Cookie("studentEmail", email);
+
             emailCookie.setMaxAge(60 * 60);
-            emailCookie.setPath("/analytics");
+            emailCookie.setPath(request.getContextPath());
+
             response.addCookie(emailCookie);
 
             System.out.println("Cookie created");
-         //   response.sendRedirect("/webapp/WEB-INF/views/welcome.jsp");
-            response.sendRedirect("welcome");
+
+            response.sendRedirect(request.getContextPath() + "/welcome");
         } else {
 
             System.out.println("Login failed");

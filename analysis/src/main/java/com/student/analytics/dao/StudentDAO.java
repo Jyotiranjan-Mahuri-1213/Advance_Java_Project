@@ -79,7 +79,8 @@ public class StudentDAO {
         return null;
     }
 
-    public Student getStudentByEmail(String studentEmail) {
+    public Student getStudentByEmail(String email) {
+        System.out.println("Searching student by email: " + email);
         String sql = "select * from students where email = ?";
 
         try {
@@ -93,7 +94,7 @@ public class StudentDAO {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-
+                System.out.println("Student found");
                 return new Student(
                         rs.getInt("id"),
                         rs.getString("name"),
@@ -104,6 +105,7 @@ public class StudentDAO {
                         rs.getString("password")
                 );
             }
+            System.out.println("nhi mila bc");
 
         } catch (SQLException e) {
 

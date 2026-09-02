@@ -1,43 +1,34 @@
-<%--&lt;%&ndash;--%>
-<%--  Created by IntelliJ IDEA.--%>
-<%--  User: jyotiranjanmahuri--%>
-<%--  Date: 01-09-2026--%>
-<%--  Time: 21:38--%>
-<%--  To change this template use File | Settings | File Templates.--%>
-<%--&ndash;%&gt;--%>
-<%--<%@ page import="com.student.analytics.entity.Student" %>--%>
-<%--<%@ page import="com.student.analytics.dao.StudentDAO" %>--%>
+<%@ page import="com.student.analytics.entity.Student" %>
 
-<%--<%--%>
-<%--    String studentEmail = null;--%>
+<%
+    Student student = (Student) request.getAttribute("student");
+%>
 
-<%--    Cookie[] cookies = request.getCookies();--%>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+</head>
 
-<%--    if (cookies != null) {--%>
+<body>
 
-<%--        for (Cookie cookie : cookies) {--%>
+<h1>Welcome, <%= student.getName() %></h1>
 
-<%--            if ("studentEmail".equals(cookie.getName())) {--%>
+<h2>Student Performance Analytics Dashboard</h2>
 
-<%--                studentEmail = cookie.getValue();--%>
-<%--                break;--%>
-<%--            }--%>
-<%--        }--%>
-<%--    }--%>
+<hr>
 
-<%--    if (studentEmail == null) {--%>
+<h3>Student Information</h3>
 
-<%--        response.sendRedirect("login.html");--%>
-<%--        return;--%>
-<%--    }--%>
+<p><strong>Name:</strong> <%= student.getName() %></p>
 
-<%--    StudentDAO studentDAO = new StudentDAO();--%>
+<p><strong>Email:</strong> <%= student.getEmail() %></p>
 
-<%--    Student student = studentDAO.getStudentByEmail(studentEmail);--%>
+<p><strong>Registration No:</strong> <%= student.getRegd_no() %></p>
 
-<%--    if (student == null) {--%>
+<p><strong>Course:</strong> <%= student.getCourse() %></p>
 
-<%--        response.sendRedirect("login.html");--%>
-<%--        return;--%>
-<%--    }--%>
-<%--%>--%>
+<p><strong>Semester:</strong> <%= student.getSemester() %></p>
+
+</body>
+</html>

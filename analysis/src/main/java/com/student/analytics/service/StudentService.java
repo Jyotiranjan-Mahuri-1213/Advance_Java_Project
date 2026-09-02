@@ -63,4 +63,15 @@ public class StudentService {
         }
         return studentDAO.login(email, password);
     }
+
+
+    public Student getStudentByEmail(String email) {
+
+        System.out.println("Service email: " + email);
+        if (email == null || email.trim().isEmpty()) {
+            return null;
+        }
+
+        return studentDAO.getStudentByEmail(email);
+    }
 }
