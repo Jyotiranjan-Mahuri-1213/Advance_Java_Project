@@ -13,7 +13,7 @@ public class StudentDAO {
 
     public boolean register(Student student) {
 
-        String sql = "insert into students (name, email, regd_no, course, semester,password) values (?, ?, ?, ?, ?,?)";
+        String sql = "insert into students (name, email, regd_no, course, semester,password,mobile_no) values (?, ?, ?, ?, ?,?,?)";
 
         try{
             System.out.println("load database");
@@ -27,6 +27,7 @@ public class StudentDAO {
             ps.setString(4, student.getCourse());
             ps.setString(5, String.valueOf(student.getSemester()));
             ps.setString(6, student.getPassword());
+            ps.setString(7,student.getMobile_no());
           //  ps.executeUpdate();
           //  System.out.println("data added");
             System.out.println("Execute query...");
@@ -63,7 +64,8 @@ public class StudentDAO {
                         rs.getInt("regd_no"),
                         rs.getString("course"),
                         rs.getInt("semester"),
-                        rs.getString("password")
+                        rs.getString("password"),
+                        rs.getString("mobile_no")
                 );
 
                 return student;
@@ -102,7 +104,8 @@ public class StudentDAO {
                         rs.getInt("regd_no"),
                         rs.getString("course"),
                         rs.getInt("semester"),
-                        rs.getString("password")
+                        rs.getString("password"),
+                        rs.getString("mobile_no")
                 );
             }
             System.out.println("nhi mila bc");

@@ -34,6 +34,7 @@ public class RegisterController extends HttpServlet {
         String course = request.getParameter("course");
         String semesterValue = request.getParameter("semester");
         String password = request.getParameter("password");
+        String mobile_no=request.getParameter("mobile_no");
 
 
         System.out.println("Name     : " + name);
@@ -42,6 +43,7 @@ public class RegisterController extends HttpServlet {
         System.out.println("Course   : " + course);
         System.out.println("Semester : " + semesterValue);
         System.out.println("Password : " + password);
+        System.out.println("Mobile no :" + mobile_no);
 
 
         int regdNo;
@@ -66,7 +68,8 @@ public class RegisterController extends HttpServlet {
                 regdNo,
                 course,
                 semester,
-                password
+                password,
+                mobile_no
         );
 
         boolean registered = studentService.addStudent(student);

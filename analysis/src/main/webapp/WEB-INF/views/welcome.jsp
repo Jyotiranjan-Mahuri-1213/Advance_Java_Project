@@ -29,6 +29,7 @@
 <p><strong>Course:</strong> <%= student.getCourse() %></p>
 
 <p><strong>Semester:</strong> <%= student.getSemester() %></p>
+<p><strong>Mobile no:</strong> <%= student.getMobile_no() %></p>
 
 </body>
 </html>
