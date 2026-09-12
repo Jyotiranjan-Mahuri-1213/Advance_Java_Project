@@ -6,11 +6,41 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+
+    <title>Admin Dashboard</title>
+
+</head>
+
+<body bgcolor="#4682b4">
+
+<h1>Admin Dashboard</h1>
+
+<h2>Welcome, <%= request.getAttribute("name") %></h2>
+
+<h3>Your Profile</h3>
+
+<p>
+    <strong>Email:</strong>
+    <%= request.getAttribute("email") %>
+</p>
+
+<p>
+    <strong>Mobile Number:</strong>
+    <%= request.getAttribute("mobile_no") %>
+</p>
+
+<hr>
+
+<h2>Welcome Mr. Admin</h2>
+
+<ul>
+
+   <p><strong>This feature is coming soon</strong></p>
+</ul>
+
+</body>
 </html>
