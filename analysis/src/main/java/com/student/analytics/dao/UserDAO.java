@@ -16,18 +16,19 @@ public class UserDAO {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-
             Connection con = DBConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql);
+            System.out.println("Database connection done");
 
+            PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, email);
             ps.setString(2, password);
 
+            System.out.println("details received");
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-
-                User user=new User(
+                System.out.println("data found");
+                return new User(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("email"),
@@ -36,6 +37,8 @@ public class UserDAO {
                         rs.getString("role")
                 );
             }
+
+            System.out.println("no data found");
 
         } catch (SQLException e) {
             e.printStackTrace();
