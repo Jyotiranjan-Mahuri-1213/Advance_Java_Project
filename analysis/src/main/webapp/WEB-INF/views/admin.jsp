@@ -38,8 +38,10 @@
 <h2>Welcome Mr. Admin</h2>
 
 <ul>
-
-   <p><strong>This feature is coming soon</strong></p>
+    <li>
+        <a href="add-teacher">Add Teacher</a>
+    </li>
+   <p><strong>Other features are coming soon</strong></p>
 </ul>
 
 </body>
