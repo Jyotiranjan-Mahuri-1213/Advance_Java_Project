@@ -73,7 +73,7 @@ public class RegisterController extends HttpServlet {
         );
 
         boolean registered = studentService.addStudent(student);
-        System.out.println("registration Successful");
+       // System.out.println("registration Successful");
 
         if (registered) {
             System.out.println("registration Successful");
