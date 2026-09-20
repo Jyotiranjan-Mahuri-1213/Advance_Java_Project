@@ -34,4 +34,29 @@ public class UserService {
 
         return userDAO.getUserByEmail(email);
     }
+
+    public boolean addTeacher(User user) {
+
+        if (user == null) {
+            return false;
+        }
+
+        if (user.getName() == null || user.getName().trim().isEmpty()) {
+            return false;
+        }
+
+        if (user.getEmail() == null || user.getEmail().trim().isEmpty()) {
+            return false;
+        }
+
+        if (user.getMobile_no() == null || user.getMobile_no().trim().isEmpty()) {
+            return false;
+        }
+
+        if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+            return false;
+        }
+
+        return userDAO.addTeacher(user);
+    }
 }

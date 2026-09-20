@@ -86,4 +86,36 @@ public class UserDAO {
 
         return null;
     }
+
+    public boolean addTeacher(User user) {
+
+        String sql = "insert into users (name, email, mobile_no, password, role) values (?, ?, ?, ?, ?)";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getMobile_no());
+            ps.setString(4, user.getPassword());
+
+            // Role is fixed by the backend
+            ps.setString(5, "TEACHER");
+
+            int rows = ps.executeUpdate();
+
+            return rows > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }
