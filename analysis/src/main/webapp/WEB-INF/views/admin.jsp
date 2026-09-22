@@ -41,6 +41,9 @@
     <li>
         <a href="add-teacher">Add Teacher</a>
     </li>
+    <li>
+        <a href="manage-students">Manage Students</a>
+    </li>
    <p><strong>Other features are coming soon</strong></p>
 </ul>
 

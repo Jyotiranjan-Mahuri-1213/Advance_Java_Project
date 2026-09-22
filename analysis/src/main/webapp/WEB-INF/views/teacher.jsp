@@ -35,7 +35,9 @@
 <h2>Teacher Features</h2>
 
 <ul>
-  <li>Manage Students</li>
+  <li>
+    <a href="manage-students">Manage Students</a>
+  </li>
   <li>Enter Marks</li>
   <li>Update Marks</li>
   <li>Record Attendance</li>

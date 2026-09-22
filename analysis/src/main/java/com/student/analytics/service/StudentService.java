@@ -74,4 +74,16 @@ public class StudentService {
 
         return studentDAO.getStudentByEmail(email);
     }
+
+    public List<Student> getAllStudent() {
+        return studentDAO.getAllStudents();
+    }
+
+    public boolean updateStudent(Student student) {
+        return studentDAO.updateStudent(student);
+    }
+
+    public Student getStudentWithId(int id) {
+        return studentDAO.getStudentWithId(id);
+    }
 }
