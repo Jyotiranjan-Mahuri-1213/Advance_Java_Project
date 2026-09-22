@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
 
@@ -117,5 +119,43 @@ public class UserDAO {
         }
 
         return false;
+    }
+
+    public List<User> getAllTeachers() {
+
+        List<User> teachers = new ArrayList<>();
+
+        String sql = "select * from users where role = 'TEACHER'";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                User teacher = new User(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("mobile_no"),
+                        rs.getString("password"),
+                        rs.getString("role")
+                );
+
+                teachers.add(teacher);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return teachers;
     }
 }

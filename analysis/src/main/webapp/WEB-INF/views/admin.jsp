@@ -44,6 +44,14 @@
     <li>
         <a href="manage-students">Manage Students</a>
     </li>
+
+    <li>
+        <a href="manage-subjects">Manage Subjects</a>
+    </li>
+
+    <li>
+        <a href="assign-subject">Assign Subjects to Teachers</a>
+    </li>
    <p><strong>Other features are coming soon</strong></p>
 </ul>
 

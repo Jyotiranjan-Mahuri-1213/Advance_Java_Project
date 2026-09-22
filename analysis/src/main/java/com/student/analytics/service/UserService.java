@@ -3,6 +3,8 @@ package com.student.analytics.service;
 import com.student.analytics.dao.UserDAO;
 import com.student.analytics.entity.User;
 
+import java.util.List;
+
 public class UserService {
 
     private final UserDAO userDAO;
@@ -58,5 +60,9 @@ public class UserService {
         }
 
         return userDAO.addTeacher(user);
+    }
+
+    public List<User> getAllTeachers() {
+        return userDAO.getAllTeachers();
     }
 }
