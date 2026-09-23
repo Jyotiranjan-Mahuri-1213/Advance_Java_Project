@@ -35,7 +35,9 @@
 <h2>Teacher Features</h2>
 
 <ul>
-  <li>Enter Marks</li>
+  <li>
+    <a href="enter-marks">Enter Marks</a>
+  </li>
   <li>Update Marks</li>
   <li>Record Attendance</li>
   <li>Update Attendance</li>
